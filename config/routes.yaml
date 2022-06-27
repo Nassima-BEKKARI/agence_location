@@ -1,3 +1,29 @@
 controllers:
-    resource: ../src/Controller/
-    type: attribute
+  resource: ../src/Controller/
+  type: attribute
+
+app_allVehicules:
+  path: /vehicules
+  controller: App\Controller\VehiculeController::allVehicules
+
+app_add:
+  path: /ajout-vehicule
+  controller: App\Controller\VehiculeController::add
+
+app_update:
+  path: /vehicule/{id}
+  controller: App\Controller\VehiculeController::update
+  requirements:
+    id: '\d+'
+
+app_delete:
+  path: /delete_vehicule_{id}
+  controller: App\Controller\VehiculeController::delete
+  requirements:
+    id: '\d+'
+
+app_select:
+  path: /select_vehicule_{id}
+  controller: App\Controller\VehiculeController::select
+  requirements:
+    id: '\d+'

@@ -6,6 +6,7 @@ use App\Entity\Vehicule;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 class VehiculeType extends AbstractType
@@ -17,7 +18,10 @@ class VehiculeType extends AbstractType
             ->add('marque')
             ->add('model')
             ->add('description')
-            ->add('photo')
+            ->add('imageForm', FileType::class, [
+                "mapped"=>false,
+                "required"=>false
+            ])
             ->add('prixJournalier')
             ->add('Ajouter', SubmitType::class)        ;
     }

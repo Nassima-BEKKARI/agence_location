@@ -7,10 +7,11 @@
 		<div class="card-body">
 			<h5 class="card-title">{{vehicule.titre}}</h5>
 			<h6>{{vehicule.marque}}</h6>
-            <h6>{{vehicule.model}}</h6>
-            <p>Date d'enregistrement: {{vehicule.dateEnregistrement|date("d/m/y")}}</p>
+			<h6>{{vehicule.model}}</h6>
+			<p>Date d'enregistrement:
+				{{vehicule.dateEnregistrement|date("d/m/y")}}</p>
 			<p class="card-text">{{vehicule.description}}</p>
-			<a href="{{path("app_allVehicules")}}" class="btn btn-primary">Retour</a>
+			<a href="{{path("admin_app_allVehicules")}}" class="btn btn-primary">Retour</a>
 			<img class="card-img-top" src="..." alt="Card image cap">
 		</div>
 	</div>

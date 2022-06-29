@@ -25,13 +25,21 @@
 					<td>{{vehicule.titre}}</td>
 					<td>{{vehicule.marque}}</td>
 					<td>{{vehicule.model}}</td>
-					<td>{{vehicule.description|slice(0.100)}}...</td>
-					<td>{{vehicule.photo}}</td>
+					<td>{{vehicule.description|slice(0,100)}}...</td>
+					<td><img class="img-thumbnail" src="{{asset('photosVehicules/' ~ vehicule.photo)}}" alt="{{vehicule.photo}}"></td>
 					<td>{{vehicule.prixJournalier}}</td>
 					<td>{{vehicule.dateEnregistrement|date("d/m/y")}}</td>
-					<td> <a href="{{path("app_select",{id:vehicule.id})}}"><i class="fas fa-eye mx-1"></i></a>
-                    <a href="{{path("app_update",{id:vehicule.id})}}"><i class="fas fa-edit mx-1 text-success"></i></a><a href="{{path("app_delete",{id:vehicule.id})}}"><i class="fas fa-trash mx-1 text-danger" onclick="return confirm('êtes vous sûr de vouloir supprimer le véhicule')"></i></a>
-						
+					<td>
+						<a href="{{path("app_select",{id:vehicule.id})}}">
+							<i class="fas fa-eye mx-1"></i>
+						</a>
+						<a href="{{path("admin_app_update",{id:vehicule.id})}}">
+							<i class="fas fa-edit mx-1 text-success"></i>
+						</a>
+						<a href="{{path("app_delete",{id:vehicule.id})}}">
+							<i class="fas fa-trash mx-1 text-danger" onclick="return confirm('êtes vous sûr de vouloir supprimer le véhicule')"></i>
+						</a>
+
 					</td>
 
 

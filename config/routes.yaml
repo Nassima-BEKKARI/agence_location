@@ -8,10 +8,10 @@ app_home:
 
 admin_app_allVehicules:
   path: /admin/vehicules
-  controller: App\Controller\VehiculeController::adminVehicules
+  controller: App\Controller\VehiculeController::allVehicules
 
-app_add:
-  path: /ajout-vehicule
+admin_app_add:
+  path: /admin/ajout-vehicule
   controller: App\Controller\VehiculeController::add
 
 admin_app_update:
@@ -20,8 +20,8 @@ admin_app_update:
   requirements:
     id: '\d+'
 
-app_delete:
-  path: /delete_vehicule_{id}
+admin_app_delete:
+  path: /admin/delete_vehicule_{id}
   controller: App\Controller\VehiculeController::delete
   requirements:
     id: '\d+'
@@ -31,3 +31,7 @@ app_select:
   controller: App\Controller\VehiculeController::select
   requirements:
     id: '\d+'
+
+app_allVehicules:
+  path: /vehicules
+  controller: App\Controller\VehiculeController::allVehicules

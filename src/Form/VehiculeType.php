@@ -20,7 +20,12 @@ class VehiculeType extends AbstractType
             ->add('description')
             ->add('imageForm', FileType::class, [
                 "mapped"=>false,
-                "required"=>false
+                // "required"=>false,
+                "attr"=>[
+                    'class'=>'dropify',
+                    'id'=>'input-file-now-costom-1',
+                    'for'=>'input-file-now-costom-1'
+                ]
             ])
             ->add('prixJournalier')
             ->add('Ajouter', SubmitType::class)        ;

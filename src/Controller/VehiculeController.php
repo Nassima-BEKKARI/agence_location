@@ -5,6 +5,7 @@ namespace App\Controller;
 use DateTime;
 use App\Entity\Vehicule;
 use App\Form\VehiculeType;
+use App\Repository\VehiculeRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -15,7 +16,7 @@ use Symfony\Component\HttpFoundation\File\Exception\FileException;
 
 class VehiculeController extends AbstractController
 {
-    public function adminVehicules(ManagerRegistry $doctrine)
+    public function allVehicules(ManagerRegistry $doctrine)
     {
         $vehicules = $doctrine->getRepository(Vehicule::class)->findAll();
         return $this->render('vehicule/admin/adminVehicules.html.twig',[
@@ -50,7 +51,7 @@ class VehiculeController extends AbstractController
             $manager->persist($vehicule);
             $manager->flush();
 
-            return $this->redirectToRoute("app_allVehicules");
+            return $this->redirectToRoute("admin_app_allVehicules");
         }
         return $this->render('vehicule/admin/formulaire.html.twig',[
             'formVehicule'=> $form->createView()]);
@@ -95,20 +96,19 @@ class VehiculeController extends AbstractController
         ]);
     }
 
-    public function delete(ManagerRegistry $doctrine, $id)
+    public function delete($id, VehiculeRepository $repo)
     {
-        $vehicule = $doctrine->getRepository(Vehicule::class)->find($id);
-        $manager = $doctrine->getManager();
-        $manager->remove($vehicule);
-        $manager->flush();
+        $vehicule = $repo->find($id);
+        // dd($vehicule);
+        $repo->remove($vehicule, 1);
 
-        return $this->redirectToRoute("app_allVehicules");
+        return $this->redirectToRoute("admin_app_allVehicules");
     }
 
     public function select(ManagerRegistry $doctrine, $id)
     {
         $vehicule = $doctrine->getRepository(Vehicule::class)->find($id);
-        return $this->render('vehicule/vehicule.html.twig',[
+        return $this->render('vehicule/admin/vehicule.html.twig',[
             'vehicule'=> $vehicule
         ]);
     }

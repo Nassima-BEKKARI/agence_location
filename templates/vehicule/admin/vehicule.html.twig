@@ -11,8 +11,8 @@
 			<p>Date d'enregistrement:
 				{{vehicule.dateEnregistrement|date("d/m/y")}}</p>
 			<p class="card-text">{{vehicule.description}}</p>
+			<img class="card-img-top" src=" {{asset('photosVehicules/' ~ vehicule.photo)}} " alt=" {{vehicule.photo}} " alt="Card image cap">
 			<a href="{{path("admin_app_allVehicules")}}" class="btn btn-primary">Retour</a>
-			<img class="card-img-top" src="..." alt="Card image cap">
 		</div>
 	</div>
 {% endblock %}

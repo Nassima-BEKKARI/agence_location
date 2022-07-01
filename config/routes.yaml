@@ -20,6 +20,12 @@ admin_app_update:
   requirements:
     id: '\d+'
 
+app_cgv:
+  path: /cgv
+  controller: Symfony\Bundle\FrameworkBundle\Controller\TemplateController
+  defaults:
+    template: "statique/cgv.html.twig"
+
 admin_app_delete:
   path: /admin/delete_vehicule_{id}
   controller: App\Controller\VehiculeController::delete
@@ -35,3 +41,7 @@ app_select:
 app_allVehicules:
   path: /vehicules
   controller: App\Controller\VehiculeController::allVehicules
+
+app_user:
+  path: /register
+  controller: App\Controller\RegistrationController::register

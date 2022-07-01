@@ -26,6 +26,14 @@ class VehiculeController extends AbstractController
 
     public function add(ManagerRegistry $doctrine, Request $request, SluggerInterface $slugger)
     {
+        if ( !$this->isGranted('IS_AUTHENTICATED_FULLY')) {
+            $this->addFlash('error', "Veuillez vous connecter avant de pouvoir accéder à cette page");
+            return $this->redirectToRoute('app_login');
+        }
+         if ( !$this->isGranted('ROLE_ADMIN')) {
+            $this->addFlash('error', "Vous n'êtes pas autorisé à consuletr cette page, merci de prendre contact avec un admin");
+            return $this->redirectToRoute('app_home');
+        }
         $vehicule = new Vehicule;
 
         $form = $this->createform(VehiculeType::class, $vehicule);
@@ -51,6 +59,7 @@ class VehiculeController extends AbstractController
             $manager->persist($vehicule);
             $manager->flush();
 
+            $this->addFlash('success', "Félicitations! un véhicule a bien été ajouté");
             return $this->redirectToRoute("admin_app_allVehicules");
         }
         return $this->render('vehicule/admin/formulaire.html.twig',[
@@ -59,6 +68,14 @@ class VehiculeController extends AbstractController
 
     public function update(ManagerRegistry $doctrine, Request $request, $id, SluggerInterface $slugger)
     {
+         if ( !$this->isGranted('IS_AUTHENTICATED_FULLY')) {
+            $this->addFlash('error', "Veuillez vous connecter avant de pouvoir accéder à cette page");
+            return $this->redirectToRoute('app_login');
+        }
+         if ( !$this->isGranted('ROLE_ADMIN')) {
+            $this->addFlash('error', "Vous n'êtes pas autorisé à consuletr cette page, merci de prendre contact avec un admin");
+            return $this->redirectToRoute('app_home');
+        }
         $vehicule = $doctrine->getRepository(Vehicule::class)->find($id);
         $form = $this->createform(VehiculeType::class, $vehicule);
         $form->handlerequest($request);
@@ -87,7 +104,7 @@ class VehiculeController extends AbstractController
             $manager = $doctrine->getManager();
             $manager->persist($vehicule);
             $manager->flush();
-
+            $this->addFlash('success', "le véhicule a bien été mis à jour");
             return $this->redirectToRoute('admin_app_allVehicules');
         }
 
@@ -98,10 +115,18 @@ class VehiculeController extends AbstractController
 
     public function delete($id, VehiculeRepository $repo)
     {
+         if ( !$this->isGranted('IS_AUTHENTICATED_FULLY')) {
+            $this->addFlash('error', "Veuillez vous connecter avant de pouvoir accéder à cette page");
+            return $this->redirectToRoute('app_login');
+        }
+         if ( !$this->isGranted('ROLE_ADMIN')) {
+            $this->addFlash('error', "Vous n'êtes pas autorisé à consuletr cette page, merci de prendre contact avec un admin");
+            return $this->redirectToRoute('app_home');
+        }
         $vehicule = $repo->find($id);
         // dd($vehicule);
         $repo->remove($vehicule, 1);
-
+        $this->addFlash('success', "Véhicule supprimé");
         return $this->redirectToRoute("admin_app_allVehicules");
     }
 

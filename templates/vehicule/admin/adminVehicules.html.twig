@@ -65,6 +65,7 @@
 					<h6>{{vehicule.model}}</h6>
 					<p class="card-text">{{vehicule.description|slice(0,50)}}...</p>
 					<img class="card-img-top" src=" {{asset('photosVehicules/' ~ vehicule.photo)}} " alt=" {{vehicule.photo}} ">
+					<h6>{{vehicule.prixJournalier}}€/jour</h6>
 					<a href="{{path("app_select",{id:vehicule.id})}}" class="btn btn-primary">Louer</a>
 
 				</div>
